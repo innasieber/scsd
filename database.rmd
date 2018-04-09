@@ -14,6 +14,7 @@ knit: (function(inputFile, encoding) {
 knitr::opts_chunk$set(echo=FALSE, message=FALSE)
 library(tidyverse)
 library(lingtypology)
+library(readxl)
 ```
 
 ###  The Sound Change in Sibilants Database {.tabset .tabset-fade .tabset-pills}
@@ -21,7 +22,7 @@ library(lingtypology)
 #### about database
 Here is a map of the languages from SCSD:
 ```{r}
-df <- read_csv("inventories.csv")
+df <- read_xlsx("inventories.xlsx")
 df %>% 
   mutate(cons_s_ratio = n_sibilants/n_consonants,
          label = ifelse(is.na(dialect), 
@@ -56,7 +57,7 @@ map.feature(df$language,
 #### search
 ```{r}
 library(DT)
-db <- read_csv("sound_change.csv")
+db <- read_xlsx("sound_change.xlsx")
 datatable(db, filter = 'top', rownames = FALSE, options = list(pageLength = 20, dom = 'tip'), escape = FALSE)
 ```
 
