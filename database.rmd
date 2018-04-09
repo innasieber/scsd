@@ -27,6 +27,8 @@ df %>%
   df
 map.feature(df$language,
             features = df$cons_s_ratio,
+            latitude = df$lat,
+            longitude = df$long,
             label = paste0(df$language, ", ", df$dialect),
             label.hide = TRUE,
             color = c("white", "red"),
@@ -37,6 +39,8 @@ map.feature(df$language,
 
 ```{r}
 map.feature(df$language,
+            latitude = df$lat,
+            longitude = df$long,
             features = df$n_loci,
             label = paste0(df$language, ", ", df$dialect),
             label.hide = TRUE,
