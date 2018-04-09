@@ -23,13 +23,16 @@ Here is a map of the languages from SCSD:
 ```{r}
 df <- read_csv("inventories.csv")
 df %>% 
-  mutate(cons_s_ratio = n_sibilants/n_consonants) ->
+  mutate(cons_s_ratio = n_sibilants/n_consonants,
+         label = ifelse(is.na(dialect), 
+                        language,
+                        paste0(language, ", ", dialect))) ->
   df
 map.feature(df$language,
             features = df$cons_s_ratio,
             latitude = df$lat,
             longitude = df$long,
-            label = paste0(df$language, ", ", df$dialect),
+            label = df$label,
             label.hide = TRUE,
             color = c("white", "red"),
             title = "sibilant/consonant <br> ratio",
@@ -42,7 +45,7 @@ map.feature(df$language,
             latitude = df$lat,
             longitude = df$long,
             features = df$n_loci,
-            label = paste0(df$language, ", ", df$dialect),
+            label = df$label,
             label.hide = TRUE,
             color = c("white", "red"),
             title = "n_loci",
